@@ -8,10 +8,19 @@ declare namespace Spotify {
 	}
   
 	interface Track {
+	  uri: string;
 	  name: string;
 	  artists: { name: string }[];
 	  album: {
 		images: { url: string }[];
+	  };
+	}
+  
+	interface Playlist {
+	  id: string;
+	  name: string;
+	  tracks: {
+		total: number;
 	  };
 	}
   }

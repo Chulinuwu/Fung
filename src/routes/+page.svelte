@@ -5,6 +5,8 @@
   let player: Spotify.Player | null = null;
   let currentTrack: Spotify.Track | null = null;
   let isPlaying = false;
+  let playlists: Spotify.Playlist[] = [];
+  let tracks: Spotify.Track[] = [];
 
   // ฟังก์ชันสำหรับเริ่มต้น Spotify Player
   const initializePlayer = () => {
@@ -80,19 +82,52 @@
     }
   };
 
+  // ฟังก์ชันสำหรับดึงเพลย์ลิสต์
+  const fetchPlaylists = async () => {
+    if (accessToken) {
+      const response = await fetch('https://api.spotify.com/v1/me/playlists', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        playlists = data.items;
+      }
+    }
+  };
+
+  // ฟังก์ชันสำหรับดึงรายการเพลงในเพลย์ลิสต์
+  const fetchTracks = async (playlistId: string) => {
+    if (accessToken) {
+      const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        tracks = data.items.map((item: any) => item.track);
+      }
+    }
+  };
+
   onMount(() => {
     accessToken = localStorage.getItem('spotify_access_token');
 
     if (!accessToken) {
       const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
       const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
-      const scope = 'user-read-private user-read-email user-modify-playback-state user-read-playback-state';
+      const scope = 'user-read-private user-read-email user-modify-playback-state user-read-playback-state playlist-read-private';
 
       window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
         redirectUri
       )}&scope=${encodeURIComponent(scope)}`;
     } else {
       initializePlayer();
+      fetchPlaylists();
     }
   });
 </script>
@@ -118,6 +153,24 @@
       {/if}
       <button on:click={() => skipToNextTrack()}>Next</button>
     </div>
+
+    <h2>Your Playlists</h2>
+    <ul>
+      {#each playlists as playlist}
+        <li on:click={() => fetchTracks(playlist.id)}>
+          {playlist.name} ({playlist.tracks.total} tracks)
+        </li>
+      {/each}
+    </ul>
+
+    <h2>Tracks</h2>
+    <ul>
+      {#each tracks as track}
+        <li on:click={() => playTrack(track.uri)}>
+          {track.name} - {track.artists.map((artist) => artist.name).join(', ')}
+        </li>
+      {/each}
+    </ul>
   {:else}
     <h1>Loading...</h1>
   {/if}
