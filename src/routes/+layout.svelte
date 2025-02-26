@@ -1,6 +1,9 @@
-
-
-
+<nav class="w-full flex justify-end">
+    {#if accessToken}
+      <button on:click={logout}>Logout</button>
+    {/if}
+  </nav>
+  
   <slot />
   
   <script lang="ts">

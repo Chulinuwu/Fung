@@ -57,7 +57,7 @@
 		await loadSpotifySDK();
 		if (accessToken) {
 			player = new Spotify.Player({
-				name: 'FUNG APP',
+				name: 'FUNG',
 				getOAuthToken: (cb) => cb(accessToken ?? ''),
 				volume: volume,
 			});

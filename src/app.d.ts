@@ -12,6 +12,7 @@ declare namespace Spotify {
 	  name: string;
 	  artists: { name: string }[];
 	  album: {
+		name: any;
 		images: { url: string }[];
 	  };
 	}
