@@ -1,10 +1,14 @@
-<nav class="w-full flex justify-end">
+<main class="max-w-sceen">
+<nav class="w-full  max-w-screen  flex justify-end">
     {#if accessToken}
       <button on:click={logout}>Logout</button>
     {/if}
+    
   </nav>
+<slot/>
+</main>
   
-  <slot />
+
   
   <script lang="ts">
     import { onMount } from 'svelte';

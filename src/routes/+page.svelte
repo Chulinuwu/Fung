@@ -13,7 +13,7 @@
 	let progress = 0;
 	let activeTab = 'home';
 	let recentlyPlayed: string | any[] = [];
-	let topArtists = [];
+	let topArtists: any[] = [];
 	let showVolumeSlider = false;
 
 	// ฟังก์ชันสำหรับตรวจสอบว่า token มีค่าหรือไม่
@@ -312,9 +312,9 @@
 	};
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-pink-200 font-sans">
+<div class="min-h-screen max-w-screen bg-gradient-to-br from-purple-100 via-pink-100 to-pink-200 font-sans">
 	<!-- Sidebar -->
-	<div class="flex">
+	<div class="flex max-w-screen ">
 		<div class="w-64 min-h-screen bg-pink-50 shadow-md flex flex-col p-4 fixed left-0 top-0 z-10">
 			<div class="flex items-center mb-8">
 				<h1 class="text-2xl font-bold text-pink-500">FUNG</h1>
@@ -329,7 +329,7 @@
 			</div>
 
 			<!-- Navigation Menu -->
-			<nav class="mb-8 mt-4">
+			<nav class="mb-8 mt-4 ">
 				<ul class="space-y-3">
 					<li>
 						<button
@@ -432,12 +432,12 @@
 		</div>
 
 		<!-- Main Content -->
-		<div class="ml-64 flex-grow p-6">
+		<div class="ml-64 flex-grow p-6 max-w-screen">
 			{#if accessToken}
 				{#if activeTab === 'home'}
-					<div class="mb-8">
+					<div class="mb-8  max-w-screen">
 						{#if currentTrack && currentTrack.album && currentTrack.album.images && currentTrack.album.images.length > 0}
-							<div class="rounded-2xl overflow-hidden mb-8 shadow-lg bg-gradient-to-r from-pink-300 to-purple-300 p-6 flex items-center">
+							<div class="rounded-2xl w-full max-w-screen overflow-hidden mb-8 shadow-lg bg-gradient-to-r from-pink-300 to-purple-300 p-6 flex items-center">
 								<div class="w-48 h-48 mr-8">
 									<img src={currentTrack.album.images[0].url} alt={currentTrack.name} class="w-full h-full object-cover rounded-xl shadow-md" />
 								</div>
@@ -486,20 +486,7 @@
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
 												</svg>
 											</button>
-											{#if showVolumeSlider}
-												<div class="absolute bottom-full mb-2 -left-12 bg-white p-3 rounded-lg shadow-lg z-20">
-													<input 
-														type="range" 
-														min="0" 
-														max="1" 
-														step="0.01" 
-														bind:value={volume} 
-														on:change={() => setVolume(volume)} 
-														class="w-32 h-2 appearance-none bg-pink-200 rounded-full outline-none"
-														style="--thumb-color: #ec4899;"
-													/>
-												</div>
-											{/if}
+											
 										</div>
 									</div>
 								</div>
@@ -519,14 +506,7 @@
 										style="width: {(progress / currentTrack.duration_ms) * 100}%"
 									></div>
 								</div>
-								<input
-									type="range"
-									min="0"
-									max={currentTrack.duration_ms}
-									bind:value={progress}
-									on:change={() => seekTrack(progress)}
-									class="w-full h-2 appearance-none bg-transparent absolute -mt-2 opacity-0 cursor-pointer"
-								/>
+							
 							</div>
 						{/if}
 
