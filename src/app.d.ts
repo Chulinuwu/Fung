@@ -18,6 +18,8 @@ declare namespace Spotify {
 	}
   
 	interface Playlist {
+	  images: boolean;
+	  owner: any;
 	  id: string;
 	  name: string;
 	  tracks: {

@@ -477,38 +477,12 @@
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 											</svg>
 										</button>
-										<div class="relative ml-2">
-											<button 
-												class="bg-white text-pink-500 rounded-full p-2 hover:bg-pink-100 transition-colors shadow-md"
-												on:click={() => showVolumeSlider = !showVolumeSlider}
-											>
-												<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-												</svg>
-											</button>
-											
-										</div>
+										
 									</div>
 								</div>
 							</div>
 						{/if}
 
-						<!-- Progress bar -->
-						{#if currentTrack}
-							<div class="mb-8">
-								<div class="flex items-center justify-between text-pink-500 text-sm mb-1">
-									<span>{formatTime(progress)}</span>
-									<span>{formatTime(currentTrack.duration_ms)}</span>
-								</div>
-								<div class="w-full bg-pink-100 rounded-full h-2 mb-2">
-									<div
-										class="bg-gradient-to-r from-pink-400 to-purple-400 h-2 rounded-full"
-										style="width: {(progress / currentTrack.duration_ms) * 100}%"
-									></div>
-								</div>
-							
-							</div>
-						{/if}
 
 						<h2 class="text-2xl font-bold text-pink-600 mb-4">Featured Playlists</h2>
 						<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
