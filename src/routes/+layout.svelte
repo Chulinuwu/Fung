@@ -25,6 +25,8 @@
   
     const logout = () => {
       localStorage.removeItem('spotify_access_token');
-      window.location.href = '/'; // Redirect ไปที่หน้าแรก
+      accessToken = null;
+      
+      window.location.reload(); // Reload the page
     };
   </script>
