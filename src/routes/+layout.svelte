@@ -1,15 +1,11 @@
-<nav>
-    <h1>Spotify App</h1>
-    {#if accessToken}
-      <button on:click={logout}>Logout</button>
-    {/if}
-  </nav>
-  
+
+
+
   <slot />
   
   <script lang="ts">
     import { onMount } from 'svelte';
-  
+    import '../app.css';
     let accessToken: string | null = null;
   
     onMount(() => {
