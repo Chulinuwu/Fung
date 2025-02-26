@@ -1,13 +1,16 @@
-<main class="max-w-sceen">
-<nav class="w-full  max-w-screen  flex justify-end">
+<main class="max-w-screen">
+  <nav class="w-full max-w-screen flex justify-end p-4 bg-pink-100 shadow-md">
     {#if accessToken}
-      <button on:click={logout}>Logout</button>
+      <button 
+        on:click={logout} 
+        class="bg-white text-pink-500 rounded-full px-4 py-2 hover:bg-pink-100 transition-colors shadow-md"
+      >
+        Logout
+      </button>
     {/if}
-    
   </nav>
-<slot/>
+  <slot/>
 </main>
-  
 
   
   <script lang="ts">
